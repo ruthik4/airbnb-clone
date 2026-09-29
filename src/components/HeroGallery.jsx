@@ -6,29 +6,23 @@ export default function HeroGallery({ images, onOpenPhotoTour, onOpenLightbox, i
 
   return (
     <section id="photos" className="property-header-section">
-      {/* Property Title & Action Buttons */}
+      {/* Property Title & Action Buttons on the same line */}
       <div className="property-header">
         <h1 className="property-title">Romantic Jacuzzi 1BHK Candolim | Mirashya UG10</h1>
-        
-        <div className="property-actions-bar">
-          <div style={{ fontSize: '14px', fontWeight: 600 }}>
-            <u>Candolim, Goa, India</u>
-          </div>
 
-          <div className="action-buttons">
-            <button className="action-btn" aria-label="Share listing">
-              <Share size={16} />
-              <span>Share</span>
-            </button>
-            <button 
-              className="action-btn" 
-              onClick={onToggleSave}
-              aria-label={isSaved ? "Saved to wishlists" : "Save listing"}
-            >
-              <Heart size={16} fill={isSaved ? "#FF385C" : "none"} color={isSaved ? "#FF385C" : "currentColor"} />
-              <span>{isSaved ? "Saved" : "Save"}</span>
-            </button>
-          </div>
+        <div className="action-buttons">
+          <button className="action-btn" aria-label="Share listing">
+            <Share size={16} />
+            <span>Share</span>
+          </button>
+          <button 
+            className="action-btn" 
+            onClick={onToggleSave}
+            aria-label={isSaved ? "Saved to wishlists" : "Save listing"}
+          >
+            <Heart size={16} fill={isSaved ? "#FF385C" : "none"} color={isSaved ? "#FF385C" : "currentColor"} />
+            <span>{isSaved ? "Saved" : "Save"}</span>
+          </button>
         </div>
       </div>
 
