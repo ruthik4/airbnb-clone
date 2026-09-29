@@ -9,6 +9,21 @@ export default function StickySubnav({ activeSection, isVisible, listingInfo, on
     }
   }, [isVisible, hasScrolledOnce]);
 
+  const scrollToSection = (e, targetId) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const headerOffset = 125; // Account for fixed site header + sticky subnav
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   if (!hasScrolledOnce && !isVisible) return null;
 
   const totalFor5Nights = (listingInfo?.pricing?.pricePerNight * 5 + listingInfo?.pricing?.cleaningFee + listingInfo?.pricing?.serviceFee) || 28499;
@@ -18,10 +33,34 @@ export default function StickySubnav({ activeSection, isVisible, listingInfo, on
       <div className="subnav-inner">
         {/* Left Section Links */}
         <div className="subnav-links">
-          <a href="#photos" className={`subnav-link ${activeSection === 'photos' ? 'active' : ''}`}>Photos</a>
-          <a href="#amenities" className={`subnav-link ${activeSection === 'amenities' ? 'active' : ''}`}>Amenities</a>
-          <a href="#reviews" className={`subnav-link ${activeSection === 'reviews' ? 'active' : ''}`}>Reviews</a>
-          <a href="#location" className={`subnav-link ${activeSection === 'location' ? 'active' : ''}`}>Location</a>
+          <a 
+            href="#photos" 
+            onClick={(e) => scrollToSection(e, 'photos')} 
+            className={`subnav-link ${activeSection === 'photos' ? 'active' : ''}`}
+          >
+            Photos
+          </a>
+          <a 
+            href="#amenities" 
+            onClick={(e) => scrollToSection(e, 'amenities')} 
+            className={`subnav-link ${activeSection === 'amenities' ? 'active' : ''}`}
+          >
+            Amenities
+          </a>
+          <a 
+            href="#reviews" 
+            onClick={(e) => scrollToSection(e, 'reviews')} 
+            className={`subnav-link ${activeSection === 'reviews' ? 'active' : ''}`}
+          >
+            Reviews
+          </a>
+          <a 
+            href="#location" 
+            onClick={(e) => scrollToSection(e, 'location')} 
+            className={`subnav-link ${activeSection === 'location' ? 'active' : ''}`}
+          >
+            Location
+          </a>
         </div>
 
         {/* Right Price & Reserve Block matching reference image */}

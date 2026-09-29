@@ -6,6 +6,7 @@ import BookingWidget from './components/BookingWidget';
 import ListingDetails from './components/ListingDetails';
 import PhotoTourModal from './components/PhotoTourModal';
 import LightboxModal from './components/LightboxModal';
+import AmenitiesModal from './components/AmenitiesModal';
 
 import { allImages, listingInfo } from './data/listingData';
 import './styles/airbnb.css';
@@ -13,6 +14,7 @@ import './styles/airbnb.css';
 export default function App() {
   const [isPhotoTourOpen, setIsPhotoTourOpen] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isAmenitiesModalOpen, setIsAmenitiesModalOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [isSaved, setIsSaved] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
@@ -117,6 +119,7 @@ export default function App() {
           <ListingDetails 
             listingInfo={listingInfo} 
             onClaimDiscount={handleClaimDiscount} 
+            onOpenAmenities={() => setIsAmenitiesModalOpen(true)}
           />
 
           <div className="widget-column">
@@ -152,6 +155,12 @@ export default function App() {
         onNext={handleNextLightbox}
         isSaved={isSaved}
         onToggleSave={handleToggleSave}
+      />
+
+      {/* All Amenities Modal Popup */}
+      <AmenitiesModal 
+        isOpen={isAmenitiesModalOpen}
+        onClose={() => setIsAmenitiesModalOpen(false)}
       />
 
       {/* Notification Toast */}
