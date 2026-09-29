@@ -1,122 +1,159 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
+import StickySubnav from './components/StickySubnav';
+import HeroGallery from './components/HeroGallery';
+import BookingWidget from './components/BookingWidget';
+import ListingDetails from './components/ListingDetails';
+import PhotoTourModal from './components/PhotoTourModal';
+import LightboxModal from './components/LightboxModal';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { allImages, listingInfo } from './data/listingData';
+import './styles/airbnb.css';
+
+export default function App() {
+  const [isPhotoTourOpen, setIsPhotoTourOpen] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
+  const [showStickySubnav, setShowStickySubnav] = useState(false);
+  const [activeSection, setActiveSection] = useState('photos');
+
+  // Handle scroll events to toggle sticky subnav & active section highlight
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 450) {
+        setShowStickySubnav(true);
+      } else {
+        setShowStickySubnav(false);
+      }
+
+      // Check section scroll position
+      const photos = document.getElementById('photos');
+      const amenities = document.getElementById('amenities');
+      const reviews = document.getElementById('reviews');
+      const location = document.getElementById('location');
+
+      const scrollPos = window.scrollY + 200;
+
+      if (location && scrollPos >= location.offsetTop) {
+        setActiveSection('location');
+      } else if (reviews && scrollPos >= reviews.offsetTop) {
+        setActiveSection('reviews');
+      } else if (amenities && scrollPos >= amenities.offsetTop) {
+        setActiveSection('amenities');
+      } else {
+        setActiveSection('photos');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const triggerToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 4000);
+  };
+
+  const handleOpenPhotoTour = () => {
+    setIsPhotoTourOpen(true);
+  };
+
+  const handleOpenLightbox = (index = 0) => {
+    setLightboxIndex(index);
+    setIsLightboxOpen(true);
+  };
+
+  const handlePrevLightbox = () => {
+    setLightboxIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1));
+  };
+
+  const handleNextLightbox = () => {
+    setLightboxIndex((prev) => (prev === allImages.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleToggleSave = () => {
+    setIsSaved((prev) => {
+      const next = !prev;
+      triggerToast(next ? "Saved to your Wishlist!" : "Removed from Wishlist");
+      return next;
+    });
+  };
+
+  const handleClaimDiscount = () => {
+    triggerToast("🎉 10% discount promo code applied to your booking!");
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app-container">
+      {/* Top Navbar */}
+      <Navbar />
 
-      <div className="ticks"></div>
+      {/* Sticky Secondary Navigation Header */}
+      {showStickySubnav && <StickySubnav activeSection={activeSection} />}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {/* Main Listing Body */}
+      <main className="main-content">
+        {/* 5-Photo Hero Grid */}
+        <HeroGallery 
+          images={allImages}
+          onOpenPhotoTour={handleOpenPhotoTour}
+          onOpenLightbox={handleOpenLightbox}
+          isSaved={isSaved}
+          onToggleSave={handleToggleSave}
+        />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        {/* Two Column Layout: Left Details + Right Booking Card */}
+        <div className="details-layout">
+          <ListingDetails 
+            listingInfo={listingInfo} 
+            onClaimDiscount={handleClaimDiscount} 
+          />
+
+          <div className="widget-column">
+            <BookingWidget 
+              pricing={listingInfo.pricing} 
+              rating={listingInfo.rating} 
+              reviewsCount={listingInfo.reviewsCount}
+              onClaimDiscount={handleClaimDiscount}
+            />
+          </div>
+        </div>
+      </main>
+
+      {/* Fullscreen Photo Tour View */}
+      <PhotoTourModal 
+        isOpen={isPhotoTourOpen}
+        onClose={() => setIsPhotoTourOpen(false)}
+        onSelectPhoto={(idx) => {
+          setIsPhotoTourOpen(false);
+          handleOpenLightbox(idx);
+        }}
+        isSaved={isSaved}
+        onToggleSave={handleToggleSave}
+      />
+
+      {/* Lightbox Single Photo Modal Viewer */}
+      <LightboxModal 
+        isOpen={isLightboxOpen}
+        images={allImages}
+        activeIndex={lightboxIndex}
+        onClose={() => setIsLightboxOpen(false)}
+        onPrev={handlePrevLightbox}
+        onNext={handleNextLightbox}
+        isSaved={isSaved}
+        onToggleSave={handleToggleSave}
+      />
+
+      {/* Notification Toast */}
+      {toastMessage && (
+        <div className="claim-toast">
+          {toastMessage}
+        </div>
+      )}
+    </div>
+  );
 }
-
-export default App
