@@ -63,6 +63,75 @@ export const photoCategories = [
   }
 ];
 
+export const categorizedAmenities = [
+  {
+    category: "Bathroom",
+    items: [
+      { name: "Hairdryer", icon: "Wind" },
+      { name: "Cleaning products", icon: "Sparkles" },
+      { name: "Shampoo", icon: "Droplets" },
+      { name: "Hot water", icon: "Flame" },
+      { name: "Shower gel", icon: "Droplets" }
+    ]
+  },
+  {
+    category: "Bedroom and laundry",
+    items: [
+      { name: "Washing machine", icon: "Shirt" },
+      { name: "Essentials (towels, bed sheets, soap, toilet paper)", icon: "Sparkles" },
+      { name: "Hangers", icon: "Shirt" },
+      { name: "Bed linen", icon: "Sparkles" },
+      { name: "Extra pillows and blankets", icon: "Sparkles" },
+      { name: "Room-darkening shades", icon: "Sun" },
+      { name: "Iron", icon: "Shirt" }
+    ]
+  },
+  {
+    category: "Entertainment & Internet",
+    items: [
+      { name: "HD TV with Netflix", icon: "Tv" },
+      { name: "Fast Wi-Fi (150 Mbps)", icon: "Wifi" }
+    ]
+  },
+  {
+    category: "Heating and cooling",
+    items: [
+      { name: "Air conditioning", icon: "Wind" },
+      { name: "Ceiling fan", icon: "Wind" }
+    ]
+  },
+  {
+    category: "Home safety",
+    items: [
+      { name: "Smoke alarm", icon: "ShieldCheck" },
+      { name: "Carbon monoxide alarm", icon: "ShieldCheck" },
+      { name: "First aid kit", icon: "ShieldCheck" }
+    ]
+  },
+  {
+    category: "Kitchen and dining",
+    items: [
+      { name: "Kitchen", icon: "Utensils" },
+      { name: "Refrigerator", icon: "Utensils" },
+      { name: "Microwave", icon: "Utensils" },
+      { name: "Cooking basics (pots, pans, oil, salt)", icon: "Utensils" },
+      { name: "Dishes and cutlery", icon: "Utensils" },
+      { name: "Stove", icon: "Flame" },
+      { name: "Hot water kettle", icon: "Utensils" }
+    ]
+  },
+  {
+    category: "Services & Facilities",
+    items: [
+      { name: "Free parking on premises", icon: "Car" },
+      { name: "Shared Outdoor Pool", icon: "Waves" },
+      { name: "Private Jacuzzi", icon: "Sparkles" },
+      { name: "Dedicated Workspace", icon: "Laptop" },
+      { name: "Elevator access", icon: "Building" }
+    ]
+  }
+];
+
 export const listingInfo = {
   title: "Romantic Jacuzzi 1BHK Candolim | Mirashya UG10",
   location: "Candolim, Goa, India",
@@ -71,7 +140,7 @@ export const listingInfo = {
   isGuestFavorite: true,
   host: {
     name: "Mirashya",
-    avatar: allImages[0].url, // use handsome preview avatar
+    avatar: allImages[0].url,
     isSuperhost: true,
     yearsHosting: 4,
     coHosts: ["Alex", "Rahul"]

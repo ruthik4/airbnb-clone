@@ -17,7 +17,7 @@ const iconMap = {
   Building: <Building size={22} />
 };
 
-export default function ListingDetails({ listingInfo, onClaimDiscount }) {
+export default function ListingDetails({ listingInfo, onClaimDiscount, onOpenAmenities }) {
   const [showFullDesc, setShowFullDesc] = useState(false);
 
   return (
@@ -140,7 +140,7 @@ export default function ListingDetails({ listingInfo, onClaimDiscount }) {
             </div>
           ))}
         </div>
-        <button className="amenities-all-btn">
+        <button className="amenities-all-btn" onClick={onOpenAmenities}>
           Show all {listingInfo.amenities.length} amenities
         </button>
       </div>
