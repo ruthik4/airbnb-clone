@@ -3,6 +3,7 @@ import {
   Trophy, Star, Key, Calendar, Sparkles, Wifi, Car, Waves, 
   Wind, Laptop, Tv, Shirt, Utensils, Building, ShieldCheck, MapPin, ChevronRight
 } from 'lucide-react';
+import CalendarSection from './CalendarSection';
 
 const iconMap = {
   Sparkles: <Sparkles size={22} />,
@@ -144,6 +145,11 @@ export default function ListingDetails({ listingInfo, onClaimDiscount, onOpenAme
           Show all {listingInfo.amenities.length} amenities
         </button>
       </div>
+
+      <div className="section-divider" />
+
+      {/* Interactive Dual Month Calendar Section */}
+      <CalendarSection locationName="Candolim" />
 
       <div className="section-divider" />
 
