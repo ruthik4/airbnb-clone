@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  Trophy, Star, Key, Calendar, Sparkles, Wifi, Car, Waves, 
-  Wind, Laptop, Tv, Shirt, Utensils, Building, ShieldCheck, MapPin, ChevronRight
+  Trophy, Key, Calendar, Sparkles, Wifi, Car, Waves, 
+  Wind, Laptop, Tv, Shirt, Utensils, Building, MapPin, ChevronRight
 } from 'lucide-react';
 import CalendarSection from './CalendarSection';
 
@@ -150,107 +150,48 @@ export default function ListingDetails({ listingInfo, onClaimDiscount, onOpenAme
 
       {/* Interactive Dual Month Calendar Section */}
       <CalendarSection locationName="Candolim" />
+    </div>
+  );
+}
 
-      <div className="section-divider" />
-
-      {/* Reviews Section */}
-      <div id="reviews">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
-          <Star size={22} fill="currentColor" />
-          <h3 className="section-title" style={{ margin: 0 }}>
-            {listingInfo.rating} · {listingInfo.reviewsCount} reviews
-          </h3>
-        </div>
-
-        {/* Rating Breakdown Bars */}
-        <div className="review-scores-grid">
-          <div className="score-bar-row">
-            <span>Cleanliness</span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div className="score-bar-track"><div className="score-bar-fill" style={{ width: '98%' }} /></div>
-              <span>4.9</span>
-            </div>
-          </div>
-          <div className="score-bar-row">
-            <span>Accuracy</span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div className="score-bar-track"><div className="score-bar-fill" style={{ width: '100%' }} /></div>
-              <span>5.0</span>
-            </div>
-          </div>
-          <div className="score-bar-row">
-            <span>Communication</span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div className="score-bar-track"><div className="score-bar-fill" style={{ width: '98%' }} /></div>
-              <span>4.9</span>
-            </div>
-          </div>
-          <div className="score-bar-row">
-            <span>Location</span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div className="score-bar-track"><div className="score-bar-fill" style={{ width: '96%' }} /></div>
-              <span>4.8</span>
-            </div>
-          </div>
-        </div>
-
-        {/* User Reviews */}
-        <div className="reviews-grid">
-          {listingInfo.reviews.map((rev) => (
-            <div key={rev.id} className="review-card">
-              <div className="review-user">
-                <img src={rev.avatar} alt={rev.name} className="review-user-avatar" />
-                <div>
-                  <div className="review-user-name">{rev.name}</div>
-                  <div className="review-user-date">{rev.date}</div>
-                </div>
-              </div>
-              <p className="review-text">{rev.comment}</p>
-            </div>
-          ))}
+export function LocationSection() {
+  return (
+    <div id="location" style={{ padding: '16px 0' }}>
+      <h3 className="section-title">Where you'll be</h3>
+      <div style={{ fontWeight: 600, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <MapPin size={18} /> Candolim, Goa, India
+      </div>
+      <div style={{ width: '100%', height: '360px', borderRadius: '16px', background: '#e5e7eb', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.6, backgroundImage: 'radial-gradient(#94a3b8 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+        <div style={{ background: '#FF385C', color: 'white', padding: '12px 18px', borderRadius: '24px', fontWeight: 700, boxShadow: '0 4px 12px rgba(0,0,0,0.2)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <MapPin size={20} /> Mirashya UG10 Candolim
         </div>
       </div>
+    </div>
+  );
+}
 
-      <div className="section-divider" />
-
-      {/* Location / Map Section */}
-      <div id="location">
-        <h3 className="section-title">Where you'll be</h3>
-        <div style={{ fontWeight: 600, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <MapPin size={18} /> Candolim, Goa, India
+export function ThingsToKnowSection() {
+  return (
+    <div style={{ padding: '16px 0' }}>
+      <h3 className="section-title">Things to know</h3>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', fontSize: '14px' }}>
+        <div>
+          <div style={{ fontWeight: 600, marginBottom: '8px' }}>House rules</div>
+          <div>Check-in: 2:00 PM - 10:00 PM</div>
+          <div>Checkout before 11:00 AM</div>
+          <div>5 guests maximum</div>
         </div>
-        {/* Interactive Map Visual Box */}
-        <div style={{ width: '100%', height: '320px', borderRadius: '16px', background: '#e5e7eb', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ position: 'absolute', inset: 0, opacity: 0.6, backgroundImage: 'radial-gradient(#94a3b8 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
-          <div style={{ background: '#FF385C', color: 'white', padding: '12px 18px', borderRadius: '24px', fontWeight: 700, boxShadow: '0 4px 12px rgba(0,0,0,0.2)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <MapPin size={20} /> Mirashya UG10 Candolim
-          </div>
+        <div>
+          <div style={{ fontWeight: 600, marginBottom: '8px' }}>Safety & property</div>
+          <div>Smoke alarm installed</div>
+          <div>Carbon monoxide alarm</div>
+          <div>Security camera on premises</div>
         </div>
-      </div>
-
-      <div className="section-divider" />
-
-      {/* Things to Know */}
-      <div>
-        <h3 className="section-title">Things to know</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', fontSize: '14px' }}>
-          <div>
-            <div style={{ fontWeight: 600, marginBottom: '8px' }}>House rules</div>
-            <div>Check-in: 2:00 PM - 10:00 PM</div>
-            <div>Checkout before 11:00 AM</div>
-            <div>5 guests maximum</div>
-          </div>
-          <div>
-            <div style={{ fontWeight: 600, marginBottom: '8px' }}>Safety & property</div>
-            <div>Smoke alarm installed</div>
-            <div>Carbon monoxide alarm</div>
-            <div>Security camera on premises</div>
-          </div>
-          <div>
-            <div style={{ fontWeight: 600, marginBottom: '8px' }}>Cancellation policy</div>
-            <div>Free cancellation for 48 hours.</div>
-            <div>Review host full policy for details.</div>
-          </div>
+        <div>
+          <div style={{ fontWeight: 600, marginBottom: '8px' }}>Cancellation policy</div>
+          <div>Free cancellation for 48 hours.</div>
+          <div>Review host full policy for details.</div>
         </div>
       </div>
     </div>

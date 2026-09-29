@@ -3,7 +3,8 @@ import Navbar from './components/Navbar';
 import StickySubnav from './components/StickySubnav';
 import HeroGallery from './components/HeroGallery';
 import BookingWidget from './components/BookingWidget';
-import ListingDetails from './components/ListingDetails';
+import ListingDetails, { LocationSection, ThingsToKnowSection } from './components/ListingDetails';
+import OverallReviewSection from './components/OverallReviewSection';
 import PhotoTourModal from './components/PhotoTourModal';
 import LightboxModal from './components/LightboxModal';
 import AmenitiesModal from './components/AmenitiesModal';
@@ -114,7 +115,7 @@ export default function App() {
           onToggleSave={handleToggleSave}
         />
 
-        {/* Two Column Layout: Left Details + Right Booking Card */}
+        {/* Two Column Layout: Left Details + Right Booking Card (sticks down to calendar section) */}
         <div className="details-layout">
           <ListingDetails 
             listingInfo={listingInfo} 
@@ -131,6 +132,21 @@ export default function App() {
             />
           </div>
         </div>
+
+        <div className="section-divider" style={{ margin: '32px 0' }} />
+
+        {/* Full-width Overall Review & Guest Favourite Section */}
+        <OverallReviewSection listingInfo={listingInfo} />
+
+        <div className="section-divider" style={{ margin: '32px 0' }} />
+
+        {/* Full-width Location Map Section */}
+        <LocationSection />
+
+        <div className="section-divider" style={{ margin: '32px 0' }} />
+
+        {/* Full-width Things to Know Section */}
+        <ThingsToKnowSection />
       </main>
 
       {/* Fullscreen Photo Tour View */}
