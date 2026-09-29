@@ -135,7 +135,7 @@ export const categorizedAmenities = [
 export const listingInfo = {
   title: "Romantic Jacuzzi 1BHK Candolim | Mirashya UG10",
   location: "Candolim, Goa, India",
-  rating: 4.92,
+  rating: 4.95,
   reviewsCount: 38,
   isGuestFavorite: true,
   host: {
