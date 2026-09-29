@@ -22,14 +22,15 @@ export default function App() {
   // Handle scroll events to toggle sticky subnav & active section highlight
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 450) {
-        setShowStickySubnav(true);
+      const photos = document.getElementById('photos');
+      if (photos) {
+        const triggerPoint = photos.offsetTop + photos.offsetHeight - 60;
+        setShowStickySubnav(window.scrollY > triggerPoint);
       } else {
-        setShowStickySubnav(false);
+        setShowStickySubnav(window.scrollY > 480);
       }
 
       // Check section scroll position
-      const photos = document.getElementById('photos');
       const amenities = document.getElementById('amenities');
       const reviews = document.getElementById('reviews');
       const location = document.getElementById('location');
@@ -93,7 +94,12 @@ export default function App() {
       <Navbar />
 
       {/* Sticky Secondary Navigation Header */}
-      {showStickySubnav && <StickySubnav activeSection={activeSection} />}
+      <StickySubnav 
+        isVisible={showStickySubnav} 
+        activeSection={activeSection} 
+        listingInfo={listingInfo}
+        onReserve={handleClaimDiscount}
+      />
 
       {/* Main Listing Body */}
       <main className="main-content">

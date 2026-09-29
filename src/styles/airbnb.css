@@ -48,7 +48,7 @@ button {
   max-width: 1120px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 24px 80px 24px;
+  padding: 0 24px 80px 24px;
 }
 
 /* Header Navbar */
@@ -186,47 +186,141 @@ button {
 }
 
 /* Secondary Sticky Section Navigation Header */
+@keyframes subnavSlideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes subnavSlideUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
 .sticky-subnav {
-  position: sticky;
-  top: 73px;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
   z-index: 90;
   background: white;
   border-bottom: 1px solid var(--airbnb-border);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
+.sticky-subnav.slide-down {
+  pointer-events: auto;
+  animation: subnavSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.sticky-subnav.slide-up {
+  pointer-events: none;
+  animation: subnavSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .subnav-inner {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subnav-links {
   display: flex;
   gap: 24px;
+  align-items: center;
 }
 
 .subnav-link {
-  padding: 16px 0;
+  padding: 14px 0;
   font-size: 14px;
   font-weight: 600;
   color: var(--airbnb-dark);
   text-decoration: none;
-  border-bottom: 3px solid transparent;
-  transition: border-color 0.2s;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
 }
 
-.subnav-link:hover,
 .subnav-link.active {
-  border-bottom-color: var(--airbnb-dark);
+  color: #222222;
+  border-bottom: 2px solid #222222;
+}
+
+.subnav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.subnav-price-block {
+  text-align: right;
+  line-height: 1.25;
+}
+
+.subnav-price-main {
+  font-size: 14px;
+  color: #222222;
+}
+
+.subnav-price-main strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.subnav-rating-sub {
+  font-size: 12px;
+  color: #222222;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.subnav-reserve-btn {
+  background: linear-gradient(to right, #E61E4F, #E31C5F, #D70466);
+  color: white;
+  border-radius: 22px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.subnav-reserve-btn:hover {
+  filter: brightness(1.08);
 }
 
 /* Property Header Title & Actions */
+.property-header-section {
+  padding-top: 24px;
+}
+
 .property-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 24px;
 }
 
 .property-title {
   font-size: 26px;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin: 0;
   color: var(--airbnb-dark);
 }
 
@@ -614,7 +708,7 @@ button {
 
 .booking-widget {
   position: sticky;
-  top: 100px;
+  top: 150px;
   border: 1px solid var(--airbnb-border);
   border-radius: var(--airbnb-radius-md);
   padding: 24px;

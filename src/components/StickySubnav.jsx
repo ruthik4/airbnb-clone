@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function StickySubnav({ activeSection }) {
+export default function StickySubnav({ activeSection, isVisible, listingInfo, onReserve }) {
+  const [hasScrolledOnce, setHasScrolledOnce] = useState(false);
+
+  useEffect(() => {
+    if (isVisible && !hasScrolledOnce) {
+      setHasScrolledOnce(true);
+    }
+  }, [isVisible, hasScrolledOnce]);
+
+  if (!hasScrolledOnce && !isVisible) return null;
+
+  const totalFor5Nights = (listingInfo?.pricing?.pricePerNight * 5 + listingInfo?.pricing?.cleaningFee + listingInfo?.pricing?.serviceFee) || 28499;
+
   return (
-    <div className="sticky-subnav">
+    <div className={`sticky-subnav ${isVisible ? 'slide-down' : 'slide-up'}`}>
       <div className="subnav-inner">
-        <a href="#photos" className={`subnav-link ${activeSection === 'photos' ? 'active' : ''}`}>Photos</a>
-        <a href="#amenities" className={`subnav-link ${activeSection === 'amenities' ? 'active' : ''}`}>Amenities</a>
-        <a href="#reviews" className={`subnav-link ${activeSection === 'reviews' ? 'active' : ''}`}>Reviews</a>
-        <a href="#location" className={`subnav-link ${activeSection === 'location' ? 'active' : ''}`}>Location</a>
+        {/* Left Section Links */}
+        <div className="subnav-links">
+          <a href="#photos" className={`subnav-link ${activeSection === 'photos' ? 'active' : ''}`}>Photos</a>
+          <a href="#amenities" className={`subnav-link ${activeSection === 'amenities' ? 'active' : ''}`}>Amenities</a>
+          <a href="#reviews" className={`subnav-link ${activeSection === 'reviews' ? 'active' : ''}`}>Reviews</a>
+          <a href="#location" className={`subnav-link ${activeSection === 'location' ? 'active' : ''}`}>Location</a>
+        </div>
+
+        {/* Right Price & Reserve Block matching reference image */}
+        <div className="subnav-right">
+          <div className="subnav-price-block">
+            <div className="subnav-price-main">
+              <strong>₹{totalFor5Nights.toLocaleString('en-IN')}</strong> for 5 nights
+            </div>
+            <div className="subnav-rating-sub">
+              ★ {listingInfo?.rating || '4.92'} · {listingInfo?.reviewsCount || '38'} reviews
+            </div>
+          </div>
+
+          <button className="subnav-reserve-btn" onClick={onReserve}>
+            Reserve
+          </button>
+        </div>
       </div>
     </div>
   );
