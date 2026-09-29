@@ -68,44 +68,63 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--airbnb-coral);
-  font-size: 20px;
-  font-weight: 800;
   text-decoration: none;
-  letter-spacing: -0.5px;
+  cursor: pointer;
+}
+
+.site-logo-img {
+  height: 35px;
+  max-height: 1000px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .search-pill {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   border: 1px solid var(--airbnb-border);
   border-radius: 40px;
-  padding: 8px 16px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+  padding: 1px 8px 1px 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
   gap: 12px;
   cursor: pointer;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  background: white;
+  z-index: 10;
+}
+
+.search-house-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 }
 
 .search-pill:hover {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+  transform: translateX(-50%);
 }
 
 .search-pill-item {
   font-size: 14px;
   font-weight: 600;
+  color: var(--airbnb-dark);
 }
 
-.search-pill-divider {
-  width: 1px;
-  height: 16px;
-  background: var(--airbnb-border);
+.search-pill-pipe {
+  color: #dddddd;
+  font-weight: 300;
+  font-size: 14px;
+  user-select: none;
 }
 
 .search-pill-item.muted {
@@ -114,7 +133,7 @@ button {
 }
 
 .search-icon-btn {
-  background: var(--airbnb-coral);
+  background: #FF385C;
   color: white;
   border-radius: 50%;
   width: 32px;
@@ -127,45 +146,43 @@ button {
 .header-user-menu {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .host-link {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
+  color: #222222;
   padding: 10px 14px;
   border-radius: 22px;
   transition: background 0.2s;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .host-link:hover {
   background: #f7f7f7;
 }
 
-.globe-btn {
-  padding: 10px;
+.globe-circle-btn,
+.menu-circle-btn {
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
+  background: #f2f2f2;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #222222;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
 }
 
-.globe-btn:hover {
-  background: #f7f7f7;
-}
-
-.user-pill {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid var(--airbnb-border);
-  border-radius: 22px;
-  padding: 6px 10px 6px 14px;
-  transition: box-shadow 0.2s;
-}
-
-.user-pill:hover {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+.globe-circle-btn:hover,
+.menu-circle-btn:hover {
+  background: #e5e5e5;
 }
 
 /* Secondary Sticky Section Navigation Header */
@@ -175,7 +192,7 @@ button {
   z-index: 90;
   background: white;
   border-bottom: 1px solid var(--airbnb-border);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
 .subnav-inner {
@@ -196,7 +213,8 @@ button {
   transition: border-color 0.2s;
 }
 
-.subnav-link:hover, .subnav-link.active {
+.subnav-link:hover,
+.subnav-link.active {
   border-bottom-color: var(--airbnb-dark);
 }
 
@@ -293,7 +311,7 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.18);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
   transition: transform 0.1s ease, background 0.2s ease;
 }
 
@@ -736,8 +754,15 @@ button {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .tour-header {
@@ -914,12 +939,19 @@ button {
   padding: 12px 24px;
   border-radius: 30px;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   z-index: 3000;
   animation: slideUp 0.3s ease;
 }
 
 @keyframes slideUp {
-  from { transform: translate(-50%, 40px); opacity: 0; }
-  to { transform: translate(-50%, 0); opacity: 1; }
+  from {
+    transform: translate(-50%, 40px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 }
