@@ -1,69 +1,72 @@
 const imageModules = import.meta.glob('../assets/demo-building/*.avif', { eager: true, import: 'default' });
 const moreBuildingModules = import.meta.glob('../assets/more-buildings/*.avif', { eager: true, import: 'default' });
 
-export const allImages = Object.keys(imageModules).sort().map((path, idx) => {
-  return {
-    id: idx + 1,
-    url: imageModules[path],
-    fileName: path.split('/').pop(),
-    title: `Photo ${idx + 1}`
-  };
+// Create filename -> URL map
+const imageMap = {};
+Object.keys(imageModules).forEach((path) => {
+  const filename = path.split('/').pop();
+  imageMap[filename] = imageModules[path];
 });
+
+// Desired Hero 5 images order
+const heroFileNames = [
+  'livingroom-1.avif',
+  'livingroom-2.avif',
+  'bedroom-1.avif',
+  'kitchen-1.avif',
+  'bathroom-1.avif'
+];
+
+// Categorized file lists
+const livingRoomFiles = Object.keys(imageMap).filter(f => f.startsWith('livingroom-')).sort();
+const bedroomFiles = Object.keys(imageMap).filter(f => f.startsWith('bedroom-')).sort();
+const kitchenFiles = Object.keys(imageMap).filter(f => f.startsWith('kitchen-')).sort();
+const bathroomFiles = Object.keys(imageMap).filter(f => f.startsWith('bathroom-')).sort();
+
+// Complete ordered file list: Hero 5 first, followed by category groups
+const orderedFileNames = Array.from(new Set([
+  ...heroFileNames,
+  ...livingRoomFiles,
+  ...bedroomFiles,
+  ...kitchenFiles,
+  ...bathroomFiles,
+  ...Object.keys(imageMap).sort()
+])).filter(f => imageMap[f]);
+
+export const allImages = orderedFileNames.map((fileName, idx) => ({
+  id: idx + 1,
+  url: imageMap[fileName],
+  fileName: fileName,
+  title: fileName.replace('.avif', '').replace('-', ' ')
+}));
 
 export const moreBuildingImages = Object.keys(moreBuildingModules).sort().map((path) => moreBuildingModules[path]);
 
-// Primary Hero 5 Images grid (1 large + 4 right side)
-export const heroImages = [
-  { ...allImages[0], category: 'Living room 1', caption: 'Spacious air-conditioned living room with comfortable sofa & TV' },
-  { ...allImages[1], category: 'Living room 2', caption: 'Dining area and open layout living room' },
-  { ...allImages[2], category: 'Full kitchen', caption: 'Modern kitchen equipped with refrigerator, microwave & kettle' },
-  { ...allImages[3], category: 'Bedroom', caption: 'Cozy king-size bed with premium linen' },
-  { ...allImages[4], category: 'Full bathroom', caption: 'Clean bathroom with hot water & Jacuzzi access' },
-];
+const getImageByFile = (fileName) => allImages.find(img => img.fileName === fileName) || allImages[0];
 
-// Photo Tour category breakdown
+// Categorized photo groups for Photo Tour Modal ("Show all photos")
 export const photoCategories = [
   {
-    name: 'Living room 1',
-    description: 'Sofa · Air conditioning · Ceiling fan · TV',
-    images: [allImages[0], allImages[1], allImages[5], allImages[10]]
-  },
-  {
-    name: 'Living room 2',
-    description: 'Dining area and lounge workspace',
-    images: [allImages[1], allImages[6], allImages[11]]
-  },
-  {
-    name: 'Full kitchen',
-    description: 'Stove, microwave, refrigerator, cooking basics',
-    images: [allImages[2], allImages[7], allImages[12], allImages[17]]
+    name: 'Living room',
+    description: 'Spacious seating area, TV, and open lounge layout',
+    images: livingRoomFiles.map(getImageByFile)
   },
   {
     name: 'Bedroom',
-    description: 'King bed, wardrobe, ambient lighting, blackout curtains',
-    images: [allImages[3], allImages[8], allImages[13], allImages[18]]
+    description: 'King bed, ambient lighting, blackout curtains, and wardrobe',
+    images: bedroomFiles.map(getImageByFile)
   },
   {
-    name: 'Full bathroom',
-    description: 'Walk-in shower, fresh towels, toiletries, hot shower',
-    images: [allImages[4], allImages[9], allImages[14]]
+    name: 'Kitchen',
+    description: 'Fully equipped kitchen, stove, microwave, kettle, refrigerator & cookware',
+    images: kitchenFiles.map(getImageByFile)
   },
   {
-    name: 'Gym',
-    description: 'Shared fitness center equipped with dumbbells and treadmill',
-    images: [allImages[15], allImages[19]]
-  },
-  {
-    name: 'Exterior',
-    description: 'Building facade, lush greenery and private entrance',
-    images: [allImages[16], allImages[20], allImages[21]]
-  },
-  {
-    name: 'Pool & Jacuzzi',
-    description: 'Outdoor swimming pool and private Jacuzzi tub',
-    images: [allImages[22], allImages[0]]
+    name: 'Bathroom',
+    description: 'Modern bathroom with shower, hot water, and toiletries',
+    images: bathroomFiles.map(getImageByFile)
   }
-];
+].filter(cat => cat.images && cat.images.length > 0);;
 
 export const categorizedAmenities = [
   {

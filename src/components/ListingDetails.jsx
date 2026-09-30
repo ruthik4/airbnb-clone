@@ -5,6 +5,8 @@ import {
 } from 'lucide-react';
 import CalendarSection from './CalendarSection';
 
+import { allImages } from '../data/listingData';
+
 const iconMap = {
   Sparkles: <Sparkles size={22} />,
   Wifi: <Wifi size={22} />,
@@ -20,6 +22,9 @@ const iconMap = {
 
 export default function ListingDetails({ listingInfo, onClaimDiscount, onOpenAmenities }) {
   const [showFullDesc, setShowFullDesc] = useState(false);
+
+  const bedroomImg = allImages.find(img => img.fileName === 'bedroom-1.avif')?.url || allImages[0]?.url;
+  const livingRoomImg = allImages.find(img => img.fileName === 'livingroom-1.avif')?.url || allImages[1]?.url;
 
   return (
     <div className="left-content">
@@ -122,9 +127,32 @@ export default function ListingDetails({ listingInfo, onClaimDiscount, onOpenAme
       {/* Where you'll sleep */}
       <div>
         <h3 className="section-title">Where you'll sleep</h3>
-        <div style={{ border: '1px solid #dddddd', borderRadius: '12px', padding: '24px', maxWidth: '240px' }}>
-          <div style={{ marginBottom: '16px', fontWeight: 600 }}>Bedroom</div>
-          <div style={{ fontSize: '14px', color: '#717171' }}>1 king bed</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', maxWidth: '620px' }}>
+          {/* Card 1: Bedroom */}
+          <div>
+            <div style={{ width: '100%', height: '180px', borderRadius: '16px', overflow: 'hidden', backgroundColor: '#f0f0f0', marginBottom: '12px' }}>
+              <img 
+                src={bedroomImg} 
+                alt="Bedroom" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
+            </div>
+            <div style={{ fontWeight: 600, fontSize: '16px', color: '#222222', marginBottom: '4px' }}>Bedroom</div>
+            <div style={{ fontSize: '14px', color: '#717171' }}>1 double bed</div>
+          </div>
+
+          {/* Card 2: Living room */}
+          <div>
+            <div style={{ width: '100%', height: '180px', borderRadius: '16px', overflow: 'hidden', backgroundColor: '#f0f0f0', marginBottom: '12px' }}>
+              <img 
+                src={livingRoomImg} 
+                alt="Living room" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
+            </div>
+            <div style={{ fontWeight: 600, fontSize: '16px', color: '#222222', marginBottom: '4px' }}>Living room</div>
+            <div style={{ fontSize: '14px', color: '#717171' }}>1 sofa</div>
+          </div>
         </div>
       </div>
 
