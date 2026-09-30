@@ -1714,3 +1714,139 @@ button {
 .modal-primary-btn:hover {
   background: #000000;
 }
+
+/* ==========================================================================
+   MORE STAYS NEARBY SECTION
+   ========================================================================== */
+
+.more-stays-container {
+  padding-top: 16px;
+  padding-bottom: 32px;
+}
+
+.more-stays-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.more-stays-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222222;
+  margin: 0;
+}
+
+.more-stays-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.more-stays-page-indicator {
+  font-size: 14px;
+  color: #222222;
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.more-stays-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #b0b0b0;
+  background: #ffffff;
+  color: #222222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.more-stays-nav-btn:hover:not(:disabled) {
+  transform: scale(1.04);
+  border-color: #222222;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+}
+
+.more-stays-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  border-color: #e0e0e0;
+}
+
+.more-stays-viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.more-stays-track {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.stay-card {
+  flex: 0 0 calc((100% - 64px) / 5);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.stay-card-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  margin-bottom: 10px;
+}
+
+.stay-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.stay-card:hover .stay-card-image {
+  transform: scale(1.04);
+}
+
+.stay-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222222;
+  margin: 0 0 4px 0;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 38px;
+}
+
+.stay-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #222222;
+}
+
+.stay-card-price {
+  font-weight: 400;
+}
+
+.stay-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 500;
+}

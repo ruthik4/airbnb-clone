@@ -1,5 +1,5 @@
-// Dynamically import all images from demo-building folder
 const imageModules = import.meta.glob('../assets/demo-building/*.avif', { eager: true, import: 'default' });
+const moreBuildingModules = import.meta.glob('../assets/more-buildings/*.avif', { eager: true, import: 'default' });
 
 export const allImages = Object.keys(imageModules).sort().map((path, idx) => {
   return {
@@ -9,6 +9,8 @@ export const allImages = Object.keys(imageModules).sort().map((path, idx) => {
     title: `Photo ${idx + 1}`
   };
 });
+
+export const moreBuildingImages = Object.keys(moreBuildingModules).sort().map((path) => moreBuildingModules[path]);
 
 // Primary Hero 5 Images grid (1 large + 4 right side)
 export const heroImages = [
@@ -224,3 +226,76 @@ Located just 5 minutes away from Candolim beach, top-rated shacks, vibrant cafes
     value: 4.9
   }
 };
+
+export const moreStaysData = [
+  {
+    id: 1,
+    title: "Beautiful Studio with a view to die for",
+    price: "₹23,600",
+    rating: 4.91,
+    image: moreBuildingImages[0] || allImages[0].url
+  },
+  {
+    id: 2,
+    title: "NAQAB - 1bhk with private pool",
+    price: "₹42,218",
+    rating: 4.95,
+    image: moreBuildingImages[1] || allImages[1].url
+  },
+  {
+    id: 3,
+    title: "Greentique Luxury Flat with plunge pool, Calangute",
+    price: "₹44,506",
+    rating: 4.94,
+    image: moreBuildingImages[2] || allImages[2].url
+  },
+  {
+    id: 4,
+    title: "The Tropical Studio | 5 mins to Beach",
+    price: "₹22,824",
+    rating: 4.96,
+    image: moreBuildingImages[3] || allImages[3].url
+  },
+  {
+    id: 5,
+    title: "Luxury Casa Bella 1BHK with plunge pool, Calangute",
+    price: "₹39,942",
+    rating: 4.95,
+    image: moreBuildingImages[4] || allImages[4].url
+  },
+  {
+    id: 6,
+    title: "Candolim Serenity Studio with Garden View",
+    price: "₹26,400",
+    rating: 4.93,
+    image: moreBuildingImages[5] || allImages[5].url
+  },
+  {
+    id: 7,
+    title: "La Maison Sunset Villa | Private Balcony",
+    price: "₹34,800",
+    rating: 4.97,
+    image: moreBuildingImages[6] || allImages[6].url
+  },
+  {
+    id: 8,
+    title: "Azure Cove Luxury 1BHK near Beach",
+    price: "₹29,150",
+    rating: 4.92,
+    image: moreBuildingImages[7] || allImages[7].url
+  },
+  {
+    id: 9,
+    title: "The Palms Modern Studio with Pool Access",
+    price: "₹31,200",
+    rating: 4.96,
+    image: allImages[8].url
+  },
+  {
+    id: 10,
+    title: "Celeste Luxury Flat in Heart of Candolim",
+    price: "₹37,800",
+    rating: 4.90,
+    image: allImages[9].url
+  }
+];

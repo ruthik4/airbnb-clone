@@ -5,6 +5,7 @@ import HeroGallery from './components/HeroGallery';
 import BookingWidget from './components/BookingWidget';
 import ListingDetails, { LocationSection, ThingsToKnowSection } from './components/ListingDetails';
 import OverallReviewSection from './components/OverallReviewSection';
+import MoreStaysSection from './components/MoreStaysSection';
 import PhotoTourModal from './components/PhotoTourModal';
 import LightboxModal from './components/LightboxModal';
 import AmenitiesModal from './components/AmenitiesModal';
@@ -147,6 +148,11 @@ export default function App() {
 
         {/* Full-width Things to Know Section */}
         <ThingsToKnowSection />
+
+        <div className="section-divider" style={{ margin: '32px 0' }} />
+
+        {/* More Stays Nearby Carousel Section */}
+        <MoreStaysSection />
       </main>
 
       {/* Fullscreen Photo Tour View */}
